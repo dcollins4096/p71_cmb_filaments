@@ -1,0 +1,20 @@
+#!/bin/tcsh
+set echo
+
+#parameter for mse
+set cut = 1
+
+
+#build the set name to analyze.
+set base = /scratch3/dcollins/Paper49d/frbs/
+set sim = 1_1
+set frame = 0030
+set axis="x"
+set frb = DD"$frame"_density_"$axis".fits
+set name = $base/$sim/$frb
+
+#run
+mse      $name -cut $cut -upSkl
+skelconv "$frb"_c"$cut".up.NDskl -breakdown -assemble 70 -toFITS
+
+#end
